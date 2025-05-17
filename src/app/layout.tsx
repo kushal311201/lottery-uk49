@@ -1,14 +1,9 @@
-import React from 'react';
-import { Inter, Montserrat } from 'next/font/google';
-import './globals.css';
+import type { Metadata } from 'next';
+import { Montserrat } from 'next/font/google';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-});
+import { defaultMetadata } from './metadata';
+import './globals.css';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -16,10 +11,7 @@ const montserrat = Montserrat({
   variable: '--font-montserrat',
 });
 
-export const metadata = {
-  title: 'UK49s Results',
-  description: 'Get the latest UK49s lottery results for Lunchtime and Teatime draws',
-};
+export const metadata: Metadata = defaultMetadata;
 
 export default function RootLayout({
   children,
@@ -27,12 +19,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }): React.JSX.Element {
   return (
-    <html lang="en" className={`${inter.variable} ${montserrat.variable}`}>
-      <body className="min-h-screen bg-background font-inter">
+    <html lang="en" className={montserrat.variable}>
+      <body className="flex min-h-screen flex-col bg-gray-50">
         <Navbar />
-        <main className="container mx-auto px-4 py-8">
-          {children}
-        </main>
+        <main className="container mx-auto flex-1 px-4 py-8">{children}</main>
         <Footer />
       </body>
     </html>
